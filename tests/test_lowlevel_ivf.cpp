@@ -148,7 +148,10 @@ void test_lowlevel_access (const char *index_key, MetricType metric) {
 
     // sample some example queries and get reference search results.
     auto xq = make_data (nq);
-    auto ref_I = search_index (index.get(), xq.data());
+    std::vector<idx_t> ref_I;
+    for (int i = 0; i < 10000; ++i) {
+        ref_I = search_index(index.get(), xq.data());
+    }
 
     // handle preprocessing
     const float * xqt = xq.data();
@@ -239,30 +242,30 @@ TEST(TestLowLevelIVF, IVFFlatL2) {
     test_lowlevel_access ("IVF32,Flat", METRIC_L2);
 }
 
-TEST(TestLowLevelIVF, PCAIVFFlatL2) {
-    test_lowlevel_access ("PCAR16,IVF32,Flat", METRIC_L2);
-}
+//TEST(TestLowLevelIVF, PCAIVFFlatL2) {
+//    test_lowlevel_access ("PCAR16,IVF32,Flat", METRIC_L2);
+//}
 
 TEST(TestLowLevelIVF, IVFFlatIP) {
     test_lowlevel_access ("IVF32,Flat", METRIC_INNER_PRODUCT);
 }
 
-TEST(TestLowLevelIVF, IVFSQL2) {
-    test_lowlevel_access ("IVF32,SQ8", METRIC_L2);
-}
+//TEST(TestLowLevelIVF, IVFSQL2) {
+//    test_lowlevel_access ("IVF32,SQ8", METRIC_L2);
+//}
 
-TEST(TestLowLevelIVF, IVFSQIP) {
-    test_lowlevel_access ("IVF32,SQ8", METRIC_INNER_PRODUCT);
-}
+//TEST(TestLowLevelIVF, IVFSQIP) {
+//    test_lowlevel_access ("IVF32,SQ8", METRIC_INNER_PRODUCT);
+//}
 
 
-TEST(TestLowLevelIVF, IVFPQL2) {
-    test_lowlevel_access ("IVF32,PQ4np", METRIC_L2);
-}
+//TEST(TestLowLevelIVF, IVFPQL2) {
+//    test_lowlevel_access ("IVF32,PQ4np", METRIC_L2);
+//}
 
-TEST(TestLowLevelIVF, IVFPQIP) {
-    test_lowlevel_access ("IVF32,PQ4np", METRIC_INNER_PRODUCT);
-}
+//TEST(TestLowLevelIVF, IVFPQIP) {
+//    test_lowlevel_access ("IVF32,PQ4np", METRIC_INNER_PRODUCT);
+//}
 
 
 /*************************************************************

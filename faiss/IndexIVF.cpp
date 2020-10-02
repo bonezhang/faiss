@@ -202,16 +202,18 @@ void IndexIVF::add_with_ids (idx_t n, const float * x, const idx_t *xids)
     FAISS_THROW_IF_NOT (is_trained);
     direct_map.check_can_add (xids);
 
-    std::unique_ptr<idx_t []> idx(new idx_t[n]);
-    quantizer->assign (n, x, idx.get());
+    //std::unique_ptr<idx_t []> idx(new idx_t[n]);
+    idx_t idx[n];
+    quantizer->assign (n, x, idx);
     size_t nadd = 0, nminus1 = 0;
 
     for (size_t i = 0; i < n; i++) {
         if (idx[i] < 0) nminus1++;
     }
 
-    std::unique_ptr<uint8_t []> flat_codes(new uint8_t [n * code_size]);
-    encode_vectors (n, x, idx.get(), flat_codes.get());
+    //std::unique_ptr<uint8_t []> flat_codes(new uint8_t [n * code_size]);
+    uint8_t flat_codes[n * code_size];
+    encode_vectors (n, x, idx, flat_codes);
 
     DirectMapAdd dm_adder(direct_map, n, xids);
 
@@ -227,7 +229,7 @@ void IndexIVF::add_with_ids (idx_t n, const float * x, const idx_t *xids)
                 idx_t id = xids ? xids[i] : ntotal + i;
                 size_t ofs = invlists->add_entry (
                      list_no, id,
-                     flat_codes.get() + i * code_size
+                     flat_codes + i * code_size
                 );
 
                 dm_adder.add (i, list_no, ofs);

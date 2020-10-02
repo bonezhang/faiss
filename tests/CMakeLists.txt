@@ -5,20 +5,20 @@
 # LICENSE file in the root directory of this source tree.
 
 add_executable(faiss_test
-  test_binary_flat.cpp
-  test_dealloc_invlists.cpp
-  test_ivfpq_codec.cpp
-  test_ivfpq_indexing.cpp
+#  test_binary_flat.cpp
+#  test_dealloc_invlists.cpp
+#  test_ivfpq_codec.cpp
+#  test_ivfpq_indexing.cpp
   test_lowlevel_ivf.cpp
-  test_merge.cpp
-  test_omp_threads.cpp
-  test_ondisk_ivf.cpp
-  test_pairs_decoding.cpp
-  test_params_override.cpp
-  test_pq_encoding.cpp
-  test_sliding_ivf.cpp
-  test_threaded_index.cpp
-  test_transfer_invlists.cpp
+#  test_merge.cpp
+#  test_omp_threads.cpp
+#  test_ondisk_ivf.cpp
+#  test_pairs_decoding.cpp
+#  test_params_override.cpp
+#  test_pq_encoding.cpp
+#  test_sliding_ivf.cpp
+#  test_threaded_index.cpp
+#  test_transfer_invlists.cpp
 )
 
 include(FetchContent)
